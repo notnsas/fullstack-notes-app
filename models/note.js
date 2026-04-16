@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 const dns = require("node:dns/promises")
 
+// const password = encodeURIComponent(process.argv[2])
+// console.log(password);
+
 dns.setServers(["1.1.1.1"]);
 mongoose.set('strictQuery', false)
 
@@ -17,8 +20,12 @@ mongoose.connect(url, { family: 4 })
   })
 
 const noteSchema = new mongoose.Schema({
-  content: String,
-  important: Boolean,
+  content: {
+    type: String,
+    minLength: 5,
+    required: true
+  },
+  important: Boolean
 })
 
 noteSchema.set('toJSON', {
