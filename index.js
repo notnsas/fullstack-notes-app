@@ -1,11 +1,11 @@
 require('dotenv').config()
 const express = require('express')
-const { log } = require('node:console');
+// const { log } = require('node:console')
 const Note = require('./models/note')
 
 const app = express()
 
-let notes = [] 
+let notes = []
 
 const requestLogger = (request, response, next) => {
   console.log('Method:', request.method)
@@ -36,8 +36,8 @@ app.get('/api/notes/:id', (request, response, next) => {
 })
 
 app.get('/api/notes', (request, response) => {
-  console.log("test");
-  
+  console.log('test')
+
   Note.find({}).then(notes => {
     console.log("notes", notes)
     response.json(notes)
